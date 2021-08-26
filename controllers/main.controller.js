@@ -4,18 +4,27 @@ const cookieParser = require("cookie-parser");
 const Follower = require("../models/m.follower");
 const User = require("../models/m.user");
 const Room = require("../models/m.room");
+const { decodeJWT } = require("../utils/utils");
 
 module.exports = class {
 
     static get findUser(){
        
         return async (req,res)=>{
-            
-           if(req.user){
-            res.status(200).json(req.user);
+          
+           const {voiceOutToken} = req.cookies;
+
+           if(!voiceOutToken) return res.json({error:"Could not find user"});
+
+           const decodedToken = await decodeJWT(voiceOutToken);
+        
+           const user = await User.findOne({where:{uuid:decodedToken.id}});
+
+           if(user){
+               res.json(user);
            }
            else{
-               res.json({error:"could not find user"});
+               res.json({error:"Could not find user"});
            }
         }
     }
