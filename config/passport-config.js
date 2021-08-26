@@ -20,6 +20,8 @@ passport.use(new GoogleStrategy({
      const avatar = profile.photos[0].value;
 
      let user = await User.findOne({where:{username:displayName}});
+    
+     console.log("User already Exist : ", user);
 
      if(user){
         return done(null,user);
@@ -28,6 +30,8 @@ passport.use(new GoogleStrategy({
      const password = uuid.v4();
 
      user = await User.create({username:displayName,password,avatar});
+    
+     console.log("created new user : ",user);
 
      done(null,user);
   }
