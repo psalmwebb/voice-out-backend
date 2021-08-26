@@ -9,9 +9,10 @@ const cookieParser = require("cookie-parser");
 
 const {cookieSessionHandler} = require("./middleware");
 
-require("./conn");
 
 require("dotenv").config();
+
+require("./conn");
 
 const PORT = process.env.PORT || 5000
 
