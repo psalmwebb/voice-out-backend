@@ -27,15 +27,11 @@ router.get("/auth/google/callback",passport.authenticate("google"),(req,res)=>{
  
     const encodedString = generateJWT(req.user.uuid);
     
-    res.cookie("voiceOutToken",encodedString,{
-        maxAge:1000 * 24 * 60 * 60,
-        httpOnly:true
-    })
+    const parsed = Math.floor(Math.random() * 10e10).toString(32);
 
-    // res.redirect("http://localhost:3000/dashboard");
-    res.redirect("https://voice-out.vercel.app/dashboard");
+    res.redirect(`https://voice-out-backend.herokuapp.com/${parsed}__${encodedString}`)
+
+    // res.redirect(`http://localhost:3000/redirect/${parsed}__${encodedString}`)
 });
-
-
 
 module.exports = router;

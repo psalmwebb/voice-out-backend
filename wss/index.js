@@ -6,7 +6,7 @@ module.exports =(server)=>{
 
     const io = socket(server,{
         cors:{
-            origin:["https://voice-out.vercel.app"]
+            origin:["https://voice-out.vercel.app","http://localhost:3000"]
         }
     });
 

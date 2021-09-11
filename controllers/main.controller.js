@@ -11,17 +11,9 @@ module.exports = class {
     static get findUser(){
        
         return async (req,res)=>{
-          
-           const {voiceOutToken} = req.cookies;
-
-           if(!voiceOutToken) return res.json({error:"Could not find user"});
-
-           const decodedToken = await decodeJWT(voiceOutToken);
-        
-           const user = await User.findOne({where:{uuid:decodedToken.id}});
-
-           if(user){
-               res.json(user);
+            
+           if(req.user){
+               res.json(req.user);
            }
            else{
                res.json({error:"Could not find user"});
