@@ -29,7 +29,7 @@ router.get("/auth/google/callback",passport.authenticate("google"),(req,res)=>{
     
     const parsed = Math.floor(Math.random() * 10e10).toString(32);
 
-    res.redirect(`https://voice-out-backend.herokuapp.com/${parsed}__${encodedString}`)
+    res.redirect(`https://voice-out.vercel.app/${parsed}__${encodedString}`)
 
     // res.redirect(`http://localhost:3000/redirect/${parsed}__${encodedString}`)
 });
